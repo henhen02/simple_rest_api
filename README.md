@@ -1,4 +1,4 @@
-# Reastful API using Node.js
+# Restful API using Node.js
 
 ## Desc
 

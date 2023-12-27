@@ -2,20 +2,21 @@ import {
     getUsers,
     getUser,
     deleteUser,
-    createUser
+    createUser,
+    updateUser,
 } from "../controllers/userController.js";
 
 import {
     Router
 } from "express";
-import jwtVerify from "../middleware/jwtVerify.js";
-import permission from "../middleware/permission.js";
+import isAdmin from "../middleware/isAdmin.js";
 
 const userRoutes = Router();
 
-userRoutes.post('/', jwtVerify, permission, createUser);
-userRoutes.get('/', jwtVerify, permission, getUsers);
-userRoutes.get('/:id', jwtVerify, permission, getUser);
-userRoutes.delete('/:id', jwtVerify, permission, deleteUser);
+userRoutes.post('/', isAdmin, createUser);
+userRoutes.get('/', isAdmin, getUsers);
+userRoutes.get('/:id', isAdmin, getUser);
+userRoutes.delete('/:id', isAdmin, deleteUser);
+userRoutes.put('/:id', isAdmin, updateUser);
 
 export default userRoutes;

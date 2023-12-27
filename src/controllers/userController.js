@@ -121,5 +121,50 @@ export const deleteUser = async (req, res) => {
 }
 
 export const updateUser = async (req, res) => {
-    return;
+    const { id } = req.params;
+    const { username, password, email, role_id } = req.body;
+
+    try {
+        if (!username || !password || !email || !role_id) {
+            return res.status(400).json({
+                message: 'All fields must be filled',
+                status: res.statusCode,
+            });
+        }
+
+        const [rows] = await database.execute(
+            'SELECT * FROM users WHERE id = ?',
+            [id]
+        );
+
+        if (!rows.length) {
+            return res.status(404).json({
+                message: 'User not found',
+                status: res.statusCode,
+            });
+        }
+
+        await database.execute(
+            'UPDATE users SET username = ?, password = ?, email = ?, role_id = ? WHERE id = ?',
+            [username, password, email, role_id, id]
+        );
+
+        return res.status(200).json({
+            message: 'Successfully update user',
+            status: res.statusCode,
+            data: {
+                id,
+                username,
+                password,
+                email,
+                role_id,
+            },
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            message: 'Internal server error',
+            status: res.statusCode,
+        });
+    }
 }

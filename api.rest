@@ -1,6 +1,6 @@
 @baseURL = http://localhost:8080/api/v1
 @adminToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAzNjc1MzM2fQ.JRujVMwGP7-L7DgXprIX9sp7yv8pb1fupSvkGiBFIf4
-@userToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzAzNjg3NzExfQ.Fka8OR2sxritoX5lnzCjU1pEIG0d8czDEiTpwO1HaV0
+@userToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzAzNzE1MTY3fQ.wJ39_rjWRzxPQC92uvQcHrH08BbUGxp5Xc30tda2_q4
 
 ### Register
 POST {{baseURL}}/auth/register
@@ -25,14 +25,45 @@ Content-Type: application/json
 GET {{baseURL}}/auth/logout
 Authorization: {{adminToken}}
 
-### Get users
+### Get users by role user
 GET {{baseURL}}/users
 Authorization: {{userToken}}
 
-### Get user
-GET {{baseURL}}/users/1
+### Get users by rolde admin
+GET {{baseURL}}/users
+Authorization: {{adminToken}}
+
+### Get user by admin token
+GET {{baseURL}}/users/3
+Authorization: {{adminToken}}
+
+### Get user by user token
+GET {{baseURL}}/users/3
 Authorization: {{userToken}}
 
 ### Delete user
 DELETE {{baseURL}}/users/15
-Authorization: {{userToken}}
+Authorization: {{adminToken}}
+
+### Update user
+PUT {{baseURL}}/users/14
+Content-Type: application/json
+Authorization: {{adminToken}}
+
+{
+    "username": "hendri",
+    "password": "hendri",
+    "email": "hendri@email.com",
+    "role_id": 1
+}
+
+### Update profile
+PUT {{baseURL}}/me
+Content-Type: application/json
+Authorization: {{adminToken}}
+
+{
+    "username": "admin",
+    "password": "admin",
+    "email": "test@email.com"
+}
