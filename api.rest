@@ -1,14 +1,19 @@
-POST http://localhost:8080/api/v1/auth/register
+@baseURL = http://localhost:8080/api/v1
+@adminToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAzNjc1MzM2fQ.JRujVMwGP7-L7DgXprIX9sp7yv8pb1fupSvkGiBFIf4
+@userToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzAzNjg3NzExfQ.Fka8OR2sxritoX5lnzCjU1pEIG0d8czDEiTpwO1HaV0
+
+### Register
+POST {{baseURL}}/auth/register
 Content-Type: application/json
 
 {
-    "username": "test",
-    "password": "test",
-    "email": "test@email.com"
+    "username": "hendri",
+    "password": "hendri",
+    "email": "hendri@email.com"
 }
 
 ### Login
-POST http://localhost:8080/api/v1/auth/login
+POST {{baseURL}}/auth/login
 Content-Type: application/json
 
 {
@@ -17,5 +22,17 @@ Content-Type: application/json
 }
 
 ### Logout
-GET http://localhost:8080/api/v1/auth/logout
-Authorization: <token>
+GET {{baseURL}}/auth/logout
+Authorization: {{adminToken}}
+
+### Get users
+GET {{baseURL}}/users
+Authorization: {{userToken}}
+
+### Get user
+GET {{baseURL}}/users/1
+Authorization: {{userToken}}
+
+### Delete user
+DELETE {{baseURL}}/users/15
+Authorization: {{userToken}}
