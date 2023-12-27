@@ -9,7 +9,6 @@
 - Node.js
 - Express.js
 - MySQL
-- Sequelize
 - JWT
 
 ## Author
