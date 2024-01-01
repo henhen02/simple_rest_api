@@ -67,3 +67,67 @@ Authorization: {{adminToken}}
     "password": "admin",
     "email": "test@email.com"
 }
+
+### Get books
+GET {{baseURL}}/books
+Authorization: {{userToken}}
+
+### Get book
+GET {{baseURL}}/books/100
+Authorization: {{userToken}}
+
+### Create book
+POST {{baseURL}}/books
+Content-Type: application/json
+Authorization: {{adminToken}}
+
+{
+    "title": "Book 1",
+    "author": "Author 1",
+    "description": "Description 1",
+    "image": "Image 1"
+}
+
+### Create book user token
+POST {{baseURL}}/books
+Content-Type: application/json
+Authorization: {{userToken}}
+
+{
+    "title": "Book 1",
+    "author": "Author 1",
+    "description": "Description 1",
+    "image": "Image 1"
+}
+
+### Update book
+PUT {{baseURL}}/books/7
+Content-Type: application/json
+Authorization: {{adminToken}}
+
+{
+    "title": "Book Updated 1",
+    "author": "Author Updated 1",
+    "description": "Description Updated 1",
+    "image": "Image Updated 1"
+}
+
+### Update book user token
+PUT {{baseURL}}/books/7
+Content-Type: application/json
+Authorization: {{userToken}}
+
+{
+    "title": "Book Updated 1",
+    "author": "Author Updated 1",
+    "description": "Description Updated 1",
+    "image": "Image Updated 1"
+}
+
+### Delete book
+DELETE {{baseURL}}/books/7
+Authorization: {{adminToken}}
+
+### Delete book user token
+DELETE {{baseURL}}/books/7
+Authorization: {{userToken}}

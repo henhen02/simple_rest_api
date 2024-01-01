@@ -1,7 +1,7 @@
-import jwt from 'jsonwebtoken';
-import database from '../../database.js';
+const jwt = require('jsonwebtoken');
+const database = require('../../database');
 
-export const register = async (req, res) => {
+const register = async (req, res) => {
     const { username, password, email } = req.body;
 
     try {
@@ -41,7 +41,7 @@ export const register = async (req, res) => {
     }
 };
 
-export const login = async (req, res) => {
+const login = async (req, res) => {
     const { email, password } = req.body;
 
     try {
@@ -87,7 +87,7 @@ export const login = async (req, res) => {
     }
 };
 
-export const logout = async (req, res) => {
+const logout = async (req, res) => {
     const token = req.headers.authorization;
     try {
         if (!token) {
@@ -126,3 +126,8 @@ export const logout = async (req, res) => {
     }
 }
 
+module.exports = {
+    register,
+    login,
+    logout,
+};

@@ -1,7 +1,7 @@
-import database from "../../database.js";
-import jwt from "jsonwebtoken";
+const database = require('../../database');
+const jwt = require('jsonwebtoken');
 
-export const updateProfile = async (req, res) => {
+const updateProfile = async (req, res) => {
     const token = req.headers.authorization;
     const { username, password, email } = req.body;
     if (!username || !password || !email) {
@@ -54,3 +54,7 @@ export const updateProfile = async (req, res) => {
         });
     }
 }
+
+module.exports = {
+    updateProfile,
+};

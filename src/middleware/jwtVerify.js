@@ -1,5 +1,5 @@
-import jwt from 'jsonwebtoken';
-import database from '../../database.js';
+const database = require('../../database');
+const jwt = require('jsonwebtoken');
 
 const jwtVerify = async (req, res, next) => {
     const token = req.headers.authorization;
@@ -42,4 +42,4 @@ const jwtVerify = async (req, res, next) => {
     }
 }
 
-export default jwtVerify;
+module.exports = jwtVerify;

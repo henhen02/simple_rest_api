@@ -1,15 +1,6 @@
-import {
-    getUsers,
-    getUser,
-    deleteUser,
-    createUser,
-    updateUser,
-} from "../controllers/userController.js";
-
-import {
-    Router
-} from "express";
-import isAdmin from "../middleware/isAdmin.js";
+const { getUsers, getUser, deleteUser, createUser, updateUser } = require('../controllers/userController');
+const { Router } = require('express');
+const isAdmin = require('../middleware/isAdmin');
 
 const userRoutes = Router();
 
@@ -19,4 +10,4 @@ userRoutes.get('/:id', isAdmin, getUser);
 userRoutes.delete('/:id', isAdmin, deleteUser);
 userRoutes.put('/:id', isAdmin, updateUser);
 
-export default userRoutes;
+module.exports = userRoutes;

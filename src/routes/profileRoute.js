@@ -1,11 +1,9 @@
-import {
-    updateProfile
-} from "../controllers/profileController.js";
-import { Router } from "express";
-import jwtVerify from "../middleware/jwtVerify.js";
+const { updateProfile } = require('../controllers/profileController');
+const { Router } = require('express');
+const jwtVerify = require('../middleware/jwtVerify');
 
 const profileRoute = Router();
 
 profileRoute.put('/',jwtVerify, updateProfile);
 
-export default profileRoute;
+module.exports = profileRoute;

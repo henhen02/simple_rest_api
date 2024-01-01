@@ -1,9 +1,17 @@
-import database from "../../database.js";
+const database = require('../../database');
 
-export const createUser = async (req, res) => {
+const createUser = async (req, res) => {
     const { username, password, email, role_id } = req.body;
 
     try {
+
+        if (!username || !password || !email) {
+            return res.status(400).json({
+                message: 'All fields must be filled',
+                status: res.statusCode,
+            });
+        }
+
         const [rows] = await database.execute(
             'SELECT * FROM users WHERE email = ?',
             [email]
@@ -41,7 +49,7 @@ export const createUser = async (req, res) => {
     }
 }
 
-export const getUsers = async (req, res) => {
+const getUsers = async (req, res) => {
     try {
         const [rows] = await database.execute(
             'SELECT id, username, email, password, role_id, created_at, updated_at FROM users'
@@ -61,7 +69,7 @@ export const getUsers = async (req, res) => {
     }
 };
 
-export const getUser = async (req, res) => {
+const getUser = async (req, res) => {
     const { id } = req.params;
 
     try {
@@ -91,7 +99,7 @@ export const getUser = async (req, res) => {
     }
 }
 
-export const deleteUser = async (req, res) => {
+const deleteUser = async (req, res) => {
     const { id } = req.params;
 
     try {
@@ -120,7 +128,7 @@ export const deleteUser = async (req, res) => {
     }
 }
 
-export const updateUser = async (req, res) => {
+const updateUser = async (req, res) => {
     const { id } = req.params;
     const { username, password, email, role_id } = req.body;
 
@@ -168,3 +176,11 @@ export const updateUser = async (req, res) => {
         });
     }
 }
+
+module.exports = {
+    createUser,
+    getUsers,
+    getUser,
+    deleteUser,
+    updateUser,
+};
