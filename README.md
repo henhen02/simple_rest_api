@@ -27,7 +27,11 @@
    ```
    git clone https://github.com/henhen02/simple_rest_api.git
    ```
-2. Install dependencies
+2. Go to the project directory
+   ```
+   cd simple_rest_api
+   ```
+3. Install dependencies
    ```
    npm i
    ```
@@ -35,7 +39,7 @@
    ```
    pnpm install
    ```
-3. Run the project
+4. Run the project
    ```
    npm start
    ```
