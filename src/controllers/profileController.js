@@ -26,7 +26,7 @@ const updateProfile = async (req, res) => {
         );
 
         if (rows.length) {
-            return res.status(409).json({
+            return res.status(422).json({
                 message: "Email already exist!",
                 status: res.statusCode,
             })
@@ -38,7 +38,7 @@ const updateProfile = async (req, res) => {
         );
 
         return res.status(200).json({
-            message: 'Successfully update user',
+            message: 'Successfully update profile',
             status: res.statusCode,
             data: {
                 id: id,
@@ -55,6 +55,39 @@ const updateProfile = async (req, res) => {
     }
 }
 
+const getProfile = async (req, res) => {
+    const token = req.headers.authorization;
+    if (!token) {
+        return res.status(401).json({
+            message: 'Unauthorized',
+            status: res.statusCode,
+        })
+    };
+    try {
+        const { id } = jwt.decode(token, 'secret');
+        const [rows] = await database.execute(
+            'SELECT * FROM users WHERE id = ?',
+            [id]
+        );
+        if (!rows.length) {
+            return res.status(404).json({
+                message: 'User not found',
+                status: res.statusCode,
+            });
+        }
+        return res.status(200).json({
+            message: 'Successfully get profile',
+            status: res.statusCode,
+            data: rows[0],
+        });
+    } catch (error) {
+        return res.status(500).json({
+            message: 'Internal server error',
+            status: res.statusCode,
+        });
+    }
+};
 module.exports = {
     updateProfile,
+    getProfile,
 };

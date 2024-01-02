@@ -68,6 +68,10 @@ Authorization: {{adminToken}}
     "email": "test@email.com"
 }
 
+### Get profile
+GET {{baseURL}}/me
+Authorization: {{userToken}}
+
 ### Get books
 GET {{baseURL}}/books
 Authorization: {{userToken}}

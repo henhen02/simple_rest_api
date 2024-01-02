@@ -11,8 +11,8 @@ const register = async (req, res) => {
         );
 
         if (rows.length) { 
-            return res.status(400).json({
-                message: 'Email already exists',
+            return res.status(422).json({
+                message: 'Email already exist',
                 status: res.statusCode,
             });
         }
@@ -23,7 +23,7 @@ const register = async (req, res) => {
         );
 
         return res.status(201).json({
-            message: 'User has been created',
+            message: 'Successfully register',
             status: res.statusCode,
             data: {
                 id: result.insertId,
@@ -67,7 +67,7 @@ const login = async (req, res) => {
         );
 
         return res.status(200).json({
-            message: 'User logged in',
+            message: 'Successfully login',
             status: res.statusCode,
             data: {
                 id,
@@ -112,7 +112,7 @@ const logout = async (req, res) => {
         }
 
         return res.status(200).json({
-            message: 'User logged out',
+            message: 'Successfully logout',
             status: res.statusCode,
         });
 
